@@ -46,11 +46,13 @@ public class MainActivity extends AppCompatActivity {
         // records than we have memory to hold them, it's essentially a buffer
         Cursor query = sqLiteDatabase.rawQuery("SELECT * FROM contacts;", null);
         if(query.moveToFirst()) {
-            String name = query.getString(0);
-            int phone = query.getInt(1);
-            String email = query.getString(2);
+            do {
+                String name = query.getString(0);
+                int phone = query.getInt(1);
+                String email = query.getString(2);
 
-            Toast.makeText(this, "Name = " + name + " phone = " + phone + " email = " + email, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Name = " + name + " phone = " + phone + " email = " + email, Toast.LENGTH_LONG).show();
+            } while(query.moveToNext());
         }
 
         query.close();
